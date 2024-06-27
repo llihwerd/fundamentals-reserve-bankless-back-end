@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 const channelSchema = new mongoose.Schema({
   channelId: { type: String, required: true, unique: true },
@@ -8,6 +8,6 @@ const channelSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-const Channel = mongoose.model('Channel', channelSchema);
+const Channel = mongoose.model('Channel', channelSchema)
 
-export default Channel;
+export default { Channel }
