@@ -8,12 +8,14 @@ export const fetchChannelData = async (channelId) => {
       params: {
         part: 'snippet',
         id: channelId,
-        key: process.env.YOUTUBE_API_KEY, // Replace with your actual API key
+        key: process.env.YOUTUBE_API_KEY,
       },
     })
 
+    console.log('YouTube API Response:', response.data)
+
     const { data } = response
-    if (data.items.length === 0) {
+    if (!data || !data.items || data.items.length === 0) {
       throw new Error(`Channel with ID ${channelId} not found`)
     }
 
@@ -26,10 +28,11 @@ export const fetchChannelData = async (channelId) => {
       description: channelData.description,
       thumbnailUrl: channelData.thumbnails.default.url,
     })
-
+    
     await channel.save()
 
     return channel
+    
   } catch (error) {
     console.error('Error fetching channel data:', error)
     throw error
