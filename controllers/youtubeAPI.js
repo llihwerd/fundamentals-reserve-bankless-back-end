@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Channel from '../models/channel.js'
+import 'dotenv/config.js'
 
 // Function to fetch channel data from YouTube API
 export const fetchChannelData = async (channelId) => {
@@ -28,13 +29,15 @@ export const fetchChannelData = async (channelId) => {
       description: channelData.description,
       thumbnailUrl: channelData.thumbnails.default.url,
     })
-    
+
     await channel.save()
 
     return channel
     
   } catch (error) {
-    console.error('Error fetching channel data:', error)
-    throw error
+    console.error('Failed to fetch or save channel data:', error)
+    if (error.response) {
+      console.error('API Response Error:', error.response.data)
+    }
   }
 }
