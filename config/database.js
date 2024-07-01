@@ -7,7 +7,7 @@ mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true, 
   useUnifiedTopology: true, 
   connectTimeoutMS: 30000,
-  socketTimeoutMS: 45000,
+  socketTimeoutMS: 60000,
 }).then(() => {
   console.log("Successfully connected to MongoDB.")
 }).catch((error) => {
